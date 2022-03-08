@@ -1,3 +1,7 @@
-FROM busybox
+FROM node:16.13.2
+WORKDIR /app
+COPY . /app
+RUN 'npm i'
+
 EXPOSE 8081
-CMD ["/bin/echo", "this is a echo test"]
+CMD 'node app.js'
