@@ -11,6 +11,7 @@ RUN  apt update &&  apt upgrade \
     && apt install curl -y \ 
     && apt-get install wget -y 
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 1
 
