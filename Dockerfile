@@ -11,11 +11,11 @@ RUN  apt update &&  apt upgrade \
     && apt install curl -y \ 
     && apt-get install wget -y 
 
-RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ]
 ENV NODE_VERSION 1
 
 # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash \
+    && export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ]" \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
