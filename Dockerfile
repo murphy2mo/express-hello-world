@@ -11,8 +11,7 @@ RUN  apt update &&  apt upgrade \
     && apt install curl -y \ 
     && apt-get install wget -y 
 
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
-ENV NVM_DIR /usr/local/nvm
+RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ]
 ENV NODE_VERSION 1
 
 # Install nvm with node and npm
