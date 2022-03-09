@@ -14,9 +14,3 @@ RUN chown nobody:nogroup /app \
 
 USER nobody:nogroup
 
-# COPY --from=build --chown=nobody:nobody /stuff ./
-
-ENV HOME=/app
-ADD start.sh ./
-
-CMD ["./start.sh"]
