@@ -1,9 +1,19 @@
-FROM node:16.13.2
+FROM ubuntu
 
-RUN mkdir /.ssh
-RUN chown nobody:nobody /.ssh
-RUN sed -ri 's/^(nobody.*:)\/sbin\/nologin$/\1\/bin\/sh/' /etc/passwd
+WORKDIR /app
+
+# Here, the change proposed:
+# https://community.render.com/t/ssh-into-an-alpine-container-user-nobody-root/3335/2
+RUN chown nobody:nobody /app \
+    && mkdir /.ssh \
+    && chown nobody:nobody /.ssh \
+    && sed -ri 's/^(nobody.*:)\/sbin\/nologin$/\1\/bin\/sh/' /etc/passwd
+
 USER nobody:nobody
 
-EXPOSE 8081
+# COPY --from=build --chown=nobody:nobody /stuff ./
 
+ENV HOME=/app
+ADD start.sh ./
+
+CMD ["./start.sh"]
