@@ -8,20 +8,16 @@ WORKDIR /app
 
 
 RUN  apt update &&  apt upgrade \
-    && apt install curl -y \ 
-    && apt-get install wget -y 
+    && apt install curl -y 
 
-ENV NODE_VERSION 16.13.2
 
 # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash 
-RUN export NVM_DIR= $([ -z "${XDG_CONFIG_HOME-}" ]" 
-
-RUN source $NVM_DIR/nvm.sh \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default \
-    && npm install -g yarn
+RUN /root/nvm_install.sh && \
+  source /root/.bashrc && \
+  cd /root && \
+  nvm install 16.13.2 &&\
+  npm install -g yarn
 
 
 COPY package.json /app
