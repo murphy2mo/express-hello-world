@@ -1,15 +1,22 @@
-FROM ubuntu/nginx
+FROM node:16.13.2
 USER root
 
 
 WORKDIR /app
-COPY nginx.conf /etc/nginx/nginx.conf
 
 
 RUN  apt update &&  apt upgrade \
     && apt install curl -y \ 
     && apt-get install wget -y \
-    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    && npm install yarn -g
+
+COPY package.json /app
+
+RUN yarn
+
+COPY . /app/
+
+
 
 # Here, the change proposed:
 # https://community.render.com/t/ssh-into-an-alpine-container-user-nobody-root/3335/2
@@ -19,6 +26,6 @@ RUN  apt update &&  apt upgrade \
 #     && sed -ri 's/^(nobody.*:)\/sbin\/nologin$/\1\/bin\/sh/' /etc/passwd
 
 
-EXPOSE 80 443
+EXPOSE 8081
 
-CMD ["nginx","-g","daemon off;"]
+CMD ["npm","run","dev"]
