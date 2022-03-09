@@ -13,8 +13,7 @@ RUN  apt update &&  apt upgrade \
 
 # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash 
-RUN /root/nvm_install.sh && \
-  source /root/.bashrc && \
+RUN source /root/.bashrc && \
   cd /root && \
   nvm install 16.13.2 &&\
   npm install -g yarn
