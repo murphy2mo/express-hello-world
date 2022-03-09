@@ -13,11 +13,11 @@ RUN  apt update &&  apt upgrade \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash 
 
 RUN echo 'export NVM_DIR="$HOME/.nvm"' 
-RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm' >> "$HOME/.bashrc"
-RUN echo '[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion' >> "$HOME/.bashrc"
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'
 
-RUN nvm install 16.13.2                    && \
-    npm install -g yarn
+RUN nvm install 16.13.2 \
+    && npm install -g yarn
 
 COPY package.json /app
 
