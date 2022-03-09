@@ -1,4 +1,4 @@
-FROM Node:16.13.2
+FROM node:16.13.2
 
 RUN mkdir /.ssh
 RUN chown nobody:nobody /.ssh
