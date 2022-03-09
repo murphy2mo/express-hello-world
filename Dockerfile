@@ -1,4 +1,4 @@
-FROM nginx
+FROM ubuntu/nginx
 
 WORKDIR /app
 COPY nginx.conf /etc/nginx/nginx.conf
